@@ -1,12 +1,17 @@
 package main;
 import java.util.Set;
+import java.util.TreeSet;
+
+import models.Contacto;
+import utils.ContactoComparator;
 
 public class App {
     public static void main(String[] args) {
-        runHashSet();
+        /*runHashSet();
         runLinkedHashSet();
         runTreeSet();
-        runTreeSetConComparador();
+        runTreeSetConComparador();*/
+        runEjercicio();
     }
 
     public static void runHashSet() {
@@ -57,6 +62,46 @@ public class App {
         for (String elemento : ejemploTreeSetConComparador) {
             System.out.println(elemento);
         }
+    }
+    private static void runEjercicio(){
+
+        Contacto c1 = new Contacto("Pedro", "Lopez", "123456789");
+        Contacto c2 = new Contacto("Pedro", "Lopez", "123456789");
+
+        System.out.println(c1);
+        System.out.println(c2);
+
+        boolean comparacionReferencia = c1 == c2;
+        System.out.println(comparacionReferencia);
+        System.out.println(c1.equals(c2));
+
+
+
+        System.out.println("Comparacion HashCode: ");
+
+        boolean comparacionHashCode = c1.hashCode() == c2.hashCode();
+        System.out.println(comparacionHashCode);
+        System.out.println("c1: "+c1.hashCode()+" == c2: "+c2.hashCode()+comparacionHashCode);
+
+
+        Set<Contacto> agenda = new TreeSet<>(new ContactoComparator());
+
+
+        agenda.add(new Contacto("Pedro", "Lopez", "2222222222"));
+        agenda.add(new Contacto("Luis", "Perez", "1111111111"));
+        agenda.add(new Contacto("Ana", "Perez", "987654321"));
+        agenda.add(new Contacto("Pedro", "Lopez", "123456789"));
+
+        //el ultimo Pero Lopez tiene un telefono diferente 
+        //pero equals() lo considerara duplicado, por lo que NOO se agrega;
+
+
+        //imprimir cada nombre de la agenda 
+        for(Contacto cont : agenda){
+            System.out.println(cont);
+
+        }
+
     }
     
 }
